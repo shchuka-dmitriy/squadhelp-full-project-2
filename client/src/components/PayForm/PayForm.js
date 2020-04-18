@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { changeFocusOnCard } from '../../actions/actionCreator';
 import PayInput from '../InputComponents/PayInput/PayInput';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schems from '../../validators/validationSchemes';
 
 import 'react-credit-cards/es/styles-compiled.css';
 

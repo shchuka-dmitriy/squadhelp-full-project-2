@@ -2,7 +2,6 @@ import React from 'react';
 import Error from '../Error/Error';
 import {connect} from "react-redux";
 import {authActionRegister, clearAuth} from '../../actions/actionCreator';
-import {Redirect} from 'react-router-dom';
 import styles from './RegistrationForm.module.sass';
 import {Field, reduxForm} from 'redux-form';
 import FormInput from '../FormInput/FormInput';
@@ -10,17 +9,15 @@ import RoleInput from '../RoleInput/RoleInput';
 import AgreeTermOfServiceInput from '../AgreeTermOfServiceInput/AgreeTermOfServiceInput';
 import CONSTANTS from '../../constants';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
-
+import Schemes from '../../validators/validationSchemes';
 
 class RegistrationForm extends React.Component {
-
 
     componentWillUnmount() {
         this.props.authClear();
     }
 
-    clicked = (values) => {
+    onClickedHandler = (values) => {
         this.props.register({
             firstName: values.firstName,
             lastName: values.lastName,
@@ -31,43 +28,32 @@ class RegistrationForm extends React.Component {
         });
     };
 
-
     render() {
+        const formFieldClasses = {
+            container: styles.inputContainer,
+            input: styles.input,
+            warning: styles.fieldWarning,
+            valid: styles.valid,
+            notValid: styles.notValid
+        };
         const {handleSubmit, submitting, auth, authClear} = this.props;
         const {error} = auth;
+
         return (
             <div className={styles.signUpFormContainer}>
                 {error && <Error data={error.data} status={error.status} clearError={authClear}/>}
-                <div className={styles.headerFormContainer}>
-                    <h2>
-                        CREATE AN ACCOUNT
-                    </h2>
-                    <h4>
-                        We always keep your name and email address private.
-                    </h4>
-                </div>
-                <form onSubmit={handleSubmit(this.clicked)}>
+                <form onSubmit={handleSubmit(this.onClickedHandler)}>
                     <div className={styles.row}>
                         <Field
                             name='firstName'
-                            classes={{
-                                container: styles.inputContainer,
-                                input: styles.input,
-                                warning: styles.fieldWarning,
-                                notValid: styles.notValid
-                            }}
+                            classes={formFieldClasses}
                             component={FormInput}
                             type='text'
                             label='First name'
                         />
                         <Field
                             name='lastName'
-                            classes={{
-                                container: styles.inputContainer,
-                                input: styles.input,
-                                warning: styles.fieldWarning,
-                                notValid: styles.notValid
-                            }}
+                            classes={formFieldClasses}
                             component={FormInput}
                             type='text'
                             label='Last name'
@@ -76,24 +62,14 @@ class RegistrationForm extends React.Component {
                     <div className={styles.row}>
                         <Field
                             name='displayName'
-                            classes={{
-                                container: styles.inputContainer,
-                                input: styles.input,
-                                warning: styles.fieldWarning,
-                                notValid: styles.notValid
-                            }}
+                            classes={formFieldClasses}
                             component={FormInput}
                             type='text'
                             label='Display Name'
                         />
                         <Field
                             name='email'
-                            classes={{
-                                container: styles.inputContainer,
-                                input: styles.input,
-                                warning: styles.fieldWarning,
-                                notValid: styles.notValid
-                            }}
+                            classes={formFieldClasses}
                             component={FormInput}
                             type='text'
                             label='Email Address'
@@ -102,24 +78,14 @@ class RegistrationForm extends React.Component {
                     <div className={styles.row}>
                         <Field
                             name='password'
-                            classes={{
-                                container: styles.inputContainer,
-                                input: styles.input,
-                                warning: styles.fieldWarning,
-                                notValid: styles.notValid
-                            }}
+                            classes={formFieldClasses}
                             component={FormInput}
                             type='password'
                             label='Password'
                         />
                         <Field
                             name='confirmPassword'
-                            classes={{
-                                container: styles.inputContainer,
-                                input: styles.input,
-                                warning: styles.fieldWarning,
-                                notValid: styles.notValid
-                            }}
+                            classes={formFieldClasses}
                             component={FormInput}
                             type='password'
                             label='Password confirmation'
@@ -155,7 +121,6 @@ class RegistrationForm extends React.Component {
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
         auth: state.auth,
@@ -172,8 +137,7 @@ const mapDispatchToProps = (dispatch) => (
     }
 );
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     form: 'login',
-    validate: customValidator(Schems.RegistrationSchem)
+    validate: customValidator(Schemes.RegistrationSchema)
 })(RegistrationForm));

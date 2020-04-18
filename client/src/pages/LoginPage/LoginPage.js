@@ -7,25 +7,27 @@ import {clearErrorSignUpAndLogin} from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
 
 const LoginPage = (props) => {
-    const changeRoute = () => {
-        props.history.replace('/');
-    };
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.loginContainer}>
                 <div className={styles.headerSignUpPage}>
-                    <img src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} alt="logo"/>
+                    <Link to={'/'}>
+                        <img src={`${CONSTANTS.STATIC_IMAGES_PATH}logo.png`} alt="logo"/>
+                    </Link>
                     <div className={styles.linkLoginContainer}>
-                        <Link to='/registration' style={{textDecoration: 'none'}}><span>Signup</span></Link>
+                        <Link to='/registration' style={{textDecoration: 'none'}}>
+                            <span>Signup</span>
+                        </Link>
                     </div>
                 </div>
                 <div className={styles.loginFormContainer}>
-                    <LoginForm changeRoute={changeRoute}/>
+                    <h2 className={styles.loginFormHeader}>LOGIN TO YOUR ACCOUNT</h2>
+                    <LoginForm/>
                 </div>
             </div>
         </div>
     )
-
 };
 
 

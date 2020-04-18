@@ -4,7 +4,7 @@ import styles from './ContestCreationPage.module.sass';
 import {saveContestToStore, clearDataForContest} from '../../actions/actionCreator';
 import NextButton from '../../components/NextButton/NextButton';
 import ContestForm from '../../components/ContestForm/ContestForm';
-import Schem from '../../validators/validationSchems';
+import Schem from '../../validators/validationSchemes';
 import CONSTANTS from '../../constants';
 import BackButton from '../../components/BackButton/BackButton';
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
