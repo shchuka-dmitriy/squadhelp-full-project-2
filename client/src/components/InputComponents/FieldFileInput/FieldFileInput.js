@@ -9,7 +9,7 @@ const FieldFileInput = (props) => {
             return '';
     };
 
-    const onChange = (e) => {
+    const onChangeHandler = (e) => {
         const {input: {onChange}} = props;
         const file = e.target.files[0];
         onChange(file);
@@ -20,7 +20,7 @@ const FieldFileInput = (props) => {
         <div className={fileUploadContainer}>
             <label htmlFor="fileInput" className={labelClass}>Choose file</label>
             <span id='fileNameContainer' className={fileNameClass}>{getFileName()}</span>
-            <input className={fileInput} id="fileInput" type="file" onChange={onChange}/>
+            <input className={fileInput} id="fileInput" type="file" onChange={onChangeHandler}/>
         </div>
     )
 };

@@ -8,7 +8,7 @@ import styles from './UserInfo.module.sass';
 
 const UserInfo = (props) => {
 
-    const updateUserData = (values) => {
+    const updateUserDataHandler = (values) => {
         const formData = new FormData();
         formData.append('file', values.file);
         formData.append('firstName', values.firstName);
@@ -22,7 +22,7 @@ const UserInfo = (props) => {
     const {avatar, firstName, lastName, displayName, email, role, balance} = data;
     return (
         <div className={styles.mainContainer}>
-            {isEdit ? <UpdateUserInfoForm onSubmit={updateUserData}/>
+            {isEdit ? <UpdateUserInfoForm onSubmit={updateUserDataHandler}/>
                 :
                 <div className={styles.infoContainer}>
                     <img src={avatar === 'anon.png' ? CONSTANTS.ANONYM_IMAGE_PATH : `${CONSTANTS.publicURL}${avatar}`} className={styles.avatar} alt='user'/>
