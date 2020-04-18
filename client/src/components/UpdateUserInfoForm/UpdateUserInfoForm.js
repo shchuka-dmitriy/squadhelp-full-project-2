@@ -6,7 +6,7 @@ import styles from './UpdateUserInfoForm.module.sass';
 import ImageUpload from '../InputComponents/ImageUpload/ImageUpload';
 import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
-import Schemes from '../../validators/validationSchemes';
+import Schems from '../../validators/validationSchems';
 import Error from '../../components/Error/Error';
 
 
@@ -98,5 +98,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
     form: 'updateProfile',
-    validate: customValidator(Schemes.UpdateUserSchema)
+    validate: customValidator(Schems.UpdateUserSchema)
 })(UpdateUserInfoForm));
