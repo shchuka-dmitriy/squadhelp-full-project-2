@@ -1,7 +1,7 @@
 const express = require('express');
-const router = require('./../router');
+const router = require('../../router');
 const cors = require('cors');
-const handlerError = require('./../handlerError/handler');
+const handlerError = require('../../handlerError/handler');
 
 const expressConfig = express();
 
