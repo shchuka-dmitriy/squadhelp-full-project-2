@@ -6,7 +6,7 @@ import styles from './UpdateUserInfoForm.module.sass';
 import ImageUpload from '../InputComponents/ImageUpload/ImageUpload';
 import FormInput from '../FormInput/FormInput';
 import customValidator from '../../validators/validator';
-import Schems from '../../validators/validationSchems';
+import Schems from '../../validators/validationSchemes';
 import Error from '../../components/Error/Error';
 
 
