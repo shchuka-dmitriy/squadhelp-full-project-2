@@ -272,3 +272,18 @@ module.exports.getContests = (req, res, next) => {
       next(new ServerError());
     })
 };
+
+module.exports.getActingOffersNames = (req, res, next) => {
+  db.Offers.findAll(
+      {
+        where: req.body.options,
+        attributes: ['fileName']
+      }
+  )
+      .then(offers => {
+        res.send(offers);
+      })
+      .catch(err => {
+        next(new ServerError());
+      })
+};

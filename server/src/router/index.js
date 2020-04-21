@@ -8,6 +8,7 @@ const validators = require('../middlewares/validators');
 const chatController = require('../controllers/chatController');
 const upload = require('../utils/fileUpload');
 const router = express.Router();
+const addOffersNamesSearchOptions = require('../middlewares/offersNamesSearchingOptions');
 
 router.post(
   '/registration',
@@ -176,6 +177,12 @@ router.post(
   '/getCatalogs',
   checkToken.checkToken,
   chatController.getCatalogs,
+);
+
+router.get(
+  '/getActingOffersNames',
+   addOffersNamesSearchOptions.offersNamesSearchOptions,
+   contestController.getActingOffersNames
 );
 
 module.exports = router;
