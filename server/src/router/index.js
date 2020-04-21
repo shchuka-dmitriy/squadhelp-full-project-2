@@ -185,4 +185,15 @@ router.get(
    contestController.getActingOffersNames
 );
 
+router.get(
+    '/getAllTransactions',
+    contestController.getAllTransactions
+);
+
+router.get(
+    '/getAllUserTransactions',
+    checkToken.checkToken,
+    contestController.getAllUserTransactions
+);
+
 module.exports = router;
