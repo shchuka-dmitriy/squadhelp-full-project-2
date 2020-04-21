@@ -78,5 +78,9 @@ module.exports = (sequelize, DataTypes) => {
       { foreignKey: 'user_id', targetKey: 'id' });
   };
 
+    User.associate = function (models) {
+        User.hasMany(models.TransactionHistory,{ foreignKey: 'user_id', targetKey: 'id' });
+    };
+
   return User;
 };
