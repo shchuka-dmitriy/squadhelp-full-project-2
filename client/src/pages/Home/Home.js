@@ -8,6 +8,7 @@ import styles from './Home.module.sass';
 import carouselConstants from '../../carouselConstants';
 import {connect} from 'react-redux';
 import Spinner from '../../components/Spinner/Spinner';
+import ContestStartBlock from "../../components/ContestStartBlock/ContestStartBlock";
 
 
 const Home = (props) => {
@@ -181,6 +182,7 @@ const Home = (props) => {
                     <div className={styles.button}>
                         <Link className={styles.button__link} to="/dashboard">DASHBOARD</Link>
                     </div>
+                    <ContestStartBlock/>
                     <div className={styles.blueContainer}>
                         <h2 className={styles.whiteUnderline}>What our customers say</h2>
                         <SlideBar images={carouselConstants.feedbackSliderImages}
