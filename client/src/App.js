@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import './App.css';
+import './reset.css';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import Payment from './pages/Payment/Payment';
@@ -19,6 +20,7 @@ import CONSTANTS from './constants';
 import browserHistory from './browserHistory';
 import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatContainer';
 import PaymentTransactionsInfoPage from "./pages/PaymentTransactionsInfoPage/PaymentTransactionsInfoPage";
+import HowItWorksPage from "./pages/HowItWorksPage/HowItWorksPage";
 
 class App extends Component {
     render() {
@@ -60,6 +62,7 @@ class App extends Component {
                     <Route exact path='/contest/:id' component={PrivateHoc(ContestPage)}/>
                     <Route exact path='/account' component={PrivateHoc(UserProfile)}/>
                     <Route exact path='/transactionsInfo' component={PrivateHoc(PaymentTransactionsInfoPage)}/>
+                    <Route exact path='/howItWorks' component={HowItWorksPage}/>
                     <Route component={NotFound}/>
                 </Switch>
                 <ChatContainer/>
