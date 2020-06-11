@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700&display=swap')
+@import '../../assets/stylesConstants/breakpoints'
+@import '../../assets/stylesConstants/flexConstants'
+@import '../../assets/stylesConstants/colors'
+
+@mixin _font($family, $font-weight, $size)
+  font-family: $family
+  font-weight: $font-weight
+  font-size: $size
+
+.howDoesWorkContainer
+  @extend .flexCenter
+  align-items: flex-start
+  margin: 0 -15px
+  padding: 15px 0 0 0
+  height: auto
+  flex-direction: column
+  @media (min-width: $md)
+    flex-direction: row
+    padding: 80px 0
+    height: 290px
+  @media (max-width: $xl)
+    margin: 0 auto
+
+  .videoWrapper
+    padding: 0 15px
+    width: 50%
+    @media (max-width: $md)
+      width: 100%
+      box-sizing: border-box
+
+    .video
+      width: 100%
+      height: 100%
+
+  .DescriptionWrapper
+    width: 50%
+    padding: 0 15px
+    @media (max-width: $md)
+      width: 100%
+      padding-top: 20px
+      box-sizing: border-box
+
+    .howDoesWorkHeader
+      padding: 0 0 25px
+      margin: 0 0 20px
+      text-transform: capitalize
+      line-height: 40px
+      @include _font(('Raleway Bold', sans-serif), 500, 36px)
+
+      @media (max-width: $lg)
+        font-size: 22px
+        line-height: 25px
+        padding: 0
+      @media (max-width: $xs)
+        font-size: 25px
+
+    .howDoesWorkContent
+      line-height: 25px
+      color: $DARK_GRAY
+      @include _font(('Raleway', sans-serif), 400, 16px)
+      @media (max-width: $xs)
+        font-size: 14px
