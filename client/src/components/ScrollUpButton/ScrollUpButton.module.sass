@@ -1,0 +1,35 @@
+*
+  scroll-behavior: smooth
+
+@mixin _flexBlank
+  display: flex
+  align-items: center
+  justify-content: center
+
+.scrollUpButton
+  height: 33px
+  width: 33px
+  color: #ffffff
+  background-color: #f18762
+  cursor: pointer
+  position: fixed
+  right: 10px
+  bottom: 80px
+  border-radius: 50%
+  opacity: 0
+  transition: all ease-in-out 0.30s
+  @include _flexBlank
+  &:hover
+    opacity: 1
+
+  i
+    height: 14px
+    width: 14px
+    background-color: #ffffff
+    color: #f18762
+    font-size: 12px
+    border-radius: 50%
+    @include _flexBlank
+
+.showScrollUp
+  opacity: 0.5
