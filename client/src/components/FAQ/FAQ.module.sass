@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700&display=swap')
+@import url('http://allfont.ru/allfont.css?fonts=raleway-bold')
+@import '../../assets/stylesConstants/breakpoints'
+@import '../../assets/stylesConstants/colors'
+
+@mixin _font($font-weight, $size, $line-height)
+  font-family: 'Raleway', sans-serif
+  font-weight: $font-weight
+  font-size: $size
+  line-height: $line-height
+
+.FAQContainer
+  width: 100%
+  margin: 0 0 50px
+  @media( width: $xl)
+    margin: 0 -15px 50px !important
+    width: 1170px
+  @media( min-width: $xl)
+    margin: 0 auto 50px
+
+  .FAQHeader
+    display: flex
+    flex-direction: row
+    padding: 20px 0 43px 10px
+    margin: 0 -15px
+    border-bottom: 1px solid $LIGHT_GRAY
+    @media (max-width: $xms)
+      padding-bottom: 25px
+    @media (width: $md)
+      margin-right: 9px !important
+      margin-left: 9px !important
+    @media (max-width: $xl)
+      margin: 0
+
+    .questionMark
+      border: 2px solid $AQUA
+      border-radius: 50%
+      color: $AQUA
+      background: $WHITE
+      text-align: center
+      width: 60px
+      height: 60px
+      box-sizing: border-box
+      @include _font(300, 36px, 60px)
+
+    .FAQHeaderTitle
+      padding: 12px 15px 8px
+      font-size: 30px
+      text-transform: capitalize
+      @media (max-width: $xms)
+        font-size: 22px
+
+  .FAQContent
+    padding: 0 10px
+    @media (width: $md)
+      margin-right: 9px !important
+      margin-left: 9px !important
+
+    .questionContainer
+      margin: 10px 0
+      padding: 15px 0
+      box-sizing: border-box
+      @media (max-width: $xl)
+        padding: 15px 15px
+
+      .questionTitle
+        font-size: 18px
+        padding: 13px 0 15px
+        margin-bottom: 20px
+        box-sizing: border-box
+
+      p
+        margin-top: 15px
+        color: $DARK_GRAY
+        @include _font(400, 14px, 20px)
+        @media( min-width: $xs)
+          font-size: 16px
+
+      a
+        color: $AQUA
+        cursor: pointer
+
+      ul
+        margin-top: 20px
+        padding: 0 25px
+        list-style: none
+
+        li
+          margin: 5px 0
+          @include _font(400, 14px, 1.1)
+
+      .strong
+        font-weight: 600
+        color: $DARK_GRAY
