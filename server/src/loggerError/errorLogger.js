@@ -1,5 +1,6 @@
 import fs from 'fs';
 import moment from 'moment';
+import path from 'path';
 
 /**
  *
@@ -12,13 +13,13 @@ export default function (err) {
         code: err.code,
         stackTrace: err.stack
     };
-
+    const createdPath = path.join(__dirname, '..', 'loggerError');
     /*
     * Used method fs.appendFile for attach data to the end of the file
     * */
     fs.appendFile(
-        'loggedErrors.txt',
-        JSON.stringify(data)+'\n\n',
+        `${createdPath}/loggedErrors.txt`,
+        JSON.stringify(data)+'\n',
         (err) => {
             if (err) throw err;
     });

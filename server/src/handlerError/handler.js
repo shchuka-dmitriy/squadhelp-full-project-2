@@ -1,4 +1,4 @@
-import errorLogger from "./errorLogger";
+import errorLogger from "../loggerError/errorLogger";
 
 module.exports = (err, req, res, next) => {
   console.log(err);
