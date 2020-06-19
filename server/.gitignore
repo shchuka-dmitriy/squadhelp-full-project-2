@@ -2,3 +2,5 @@
 node_modules/
 uploadFiles/
 .eslintrc
+/src/loggerError/loggedErrors.txt
+/src/loggerError/archivedErrors/
