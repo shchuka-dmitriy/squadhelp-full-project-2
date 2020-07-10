@@ -1,0 +1,108 @@
+@import '../../assets/stylesConstants/breakpoints'
+@import '../../assets/stylesConstants/flexConstants'
+@import '../../assets/stylesConstants/colors'
+
+.notValid
+  border: 1px solid red !important
+
+.valid
+  border: 1px solid green !important
+
+.eventFormContainer
+  margin-top: 30px
+  width: 100%
+  min-width: 420px
+  @extend .flexColumnCenter
+  align-items: stretch
+  justify-content: center
+  padding: 15px 10px
+  background-color: $VERY_LIGHT_GRAY
+  box-shadow: 0 2px 11px 4px rgba(0, 0, 0, 0.1)
+
+  .fieldLabel
+    margin: 0 auto
+    padding-bottom: 10px
+
+.submitContainer
+  width: 100%
+  border-radius: 5px
+  background-color: $AQUA
+  height: 70px
+  border: 0
+
+.submitContainer + .submitContainer
+  margin-top: 15px
+
+.submitButton
+  font-size: 18px
+  font-weight: 700
+  color: white
+  text-transform: uppercase
+
+.inputContainer
+  @extend .flexCenter
+  flex-direction: column
+  align-self: stretch
+  margin-right: 20px
+  margin-left: 20px
+
+
+
+
+  .fieldWarning
+    font-size: 15px
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    color: $RED
+    border: 1px solid $STRONG_RED
+    border-radius: 4px
+    margin-bottom: 15px
+    padding: 5px
+    text-align: center
+
+  .input
+    width: 100%
+    background-color: $WHITE
+    border: none
+    border-radius: 4px
+    color: $GRAYISH_BLUE
+    font-size: 18px
+    padding: 23px 20px 23px 20px
+    outline: none
+    margin-bottom: 15px
+    flex: 1
+    @media(max-width: 1400px)
+      align-self: normal
+
+.error
+  align-self: stretch
+  margin-right: 40px
+  margin-left: 40px
+  background: red
+  color: white
+  font-size: 17px
+  letter-spacing: 0.6px
+  border: 1px solid white
+  border-radius: 8px
+  text-align: center
+  padding-right: 30px
+  padding-left: 30px
+  padding-top: 20px
+  padding-bottom: 20px
+  margin-top: 15px
+  margin-bottom: 20px
+
+.errorValid
+  font-size: 14px
+  text-align: center
+  border: 1px solid red
+  align-self: stretch
+  margin-left: 20px
+  margin-right: 20px
+  color: white
+  padding-top: 6px
+  padding-bottom: 6px
+  margin-top: 5px
+  margin-bottom: 15px
