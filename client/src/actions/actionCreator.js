@@ -436,3 +436,17 @@ export const changeModalShow=(data)=>{
         data: data
     }
 };
+
+export const createEvent = (data) => {
+    return {
+        type: ACTION.CREATE_EVENT,
+        data: data
+    }
+};
+
+export const deleteEvent = (data) => {
+    return {
+        type: ACTION.DELETE_EVENT,
+        data: data
+    }
+};
