@@ -1,0 +1,35 @@
+@import '../../assets/stylesConstants/colors'
+
+@mixin _font($font-weight, $size)
+  font-family: "Poppins", Helvetica, Arial, sans-serif
+  font-weight: $font-weight
+  font-size: $size
+
+.redMarkContainer
+  display: flex
+  &:hover
+    .helpMessage
+      visibility: visible
+
+  .helpMessage
+    visibility: hidden
+    background-color: $STRONG_RED
+    color: $WHITE !important
+    text-align: center
+    border-radius: 6px !important
+    padding: 7px 10px !important
+    position: absolute
+    top: 70px
+    right: 40px
+    z-index: 1
+    @include _font(600 !important, 14px !important)
+
+  .eventIcon
+    padding: 2px 2px 1px 15px
+
+  .eventsCount
+    border-right: 1px solid $VERY_LIGHT_GRAY
+    padding: 0 15px 6px 0
+    color: $DARK_GRAYISH_CYAN
+    text-decoration: none
+    @include _font(300, 14px)
