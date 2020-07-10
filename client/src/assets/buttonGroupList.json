@@ -1,0 +1,14 @@
+[
+  {
+    "answer": "yes",
+    "description": "The Domain should exactly match the name"
+  },
+  {
+    "answer": "yes",
+    "description": "But minor variations are allowed (Recommended)"
+  },
+  {
+    "answer": "no",
+    "description": "I am only looking for a name, not a Domain"
+  }
+]

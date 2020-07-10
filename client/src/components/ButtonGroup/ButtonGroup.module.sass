@@ -1,0 +1,30 @@
+@import "../../assets/stylesConstants/breakpoints"
+@import "../../assets/stylesConstants/flexConstants"
+
+@mixin _font($font-weight, $font-size, $line-height)
+  font-family: "Poppins", Helvetica, Arial, sans-serif
+  font-weight: $font-weight
+  font-size: $font-size
+  line-height: $line-height
+
+.buttonGroupContainer
+  @include _font(500, 16px, 1.5)
+  padding: 56px 0 16px 0
+
+  .buttonGroupHeaderTitle
+    color: #1e2022
+    margin-bottom: 8px
+
+  .buttonGroupHeaderContent
+    @include _font(400, 12px, 1.5)
+    color: #77838f
+
+.buttonsContainer
+  @include _font(500, 12px, 1)
+  display: flex
+  width: 100%
+  justify-content: space-between
+
+  @media screen and (max-width: $lg)
+    flex-direction: column
+    align-items: stretch
