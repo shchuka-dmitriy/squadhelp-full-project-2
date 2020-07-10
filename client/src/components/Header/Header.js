@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import CONSTANTS from '../../constants';
 import {getUserAction, clearUserStore, headerRequest} from '../../actions/actionCreator';
+import EventRedMark from "../EventRedMark/EventRedMark";
 
 
 class Header extends React.Component {
@@ -41,10 +42,12 @@ class Header extends React.Component {
                                       style={{textDecoration: 'none'}}><span>Messages</span></Link></li>
                             <li><Link to='http:/www.google.com' style={{textDecoration: 'none'}}><span>Affiliate Dashboard</span></Link>
                             </li>
+                            <li><Link to='/event'><span>My events</span></Link></li>
                             <li><span onClick={this.logOut}>Logout</span></li>
                         </ul>
                     </div>
                     <img src={`${CONSTANTS.STATIC_IMAGES_PATH}email.png`} className={styles.emailIcon} alt='email'/>
+                    <EventRedMark key={'eventCustomerBadge'} />
                 </>
             )
         } else {
