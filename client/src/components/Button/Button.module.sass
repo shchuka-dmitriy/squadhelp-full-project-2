@@ -1,0 +1,53 @@
+@import "../../assets/stylesConstants/breakpoints"
+@import "../../assets/stylesConstants/flexConstants"
+@import "../../assets/stylesConstants/colors"
+
+.buttonContainer
+  @extend .flexColumnCenter
+  width: 33%
+  box-sizing: border-box
+  justify-content: center
+  margin-bottom: 32px
+  padding: 16px 16px 32px
+  border: 2px solid $LIGHT_GRAYISH_BLUE2
+  border-radius: 5px
+  color: $DARK_GRAYISH_BLUE2
+  transition: all 0.3s
+  font-size: 12px
+  text-align: center
+
+  @media screen and (max-width: $lg)
+    width: 100%
+    padding: 16px
+
+  @media screen and (max-width: 767px)
+    justify-content: flex-start
+    flex-direction: row
+    align-items: center
+
+  .buttonAnswer
+    padding: 7px 12px
+    margin-bottom: 0
+    margin-right: 20px
+    color: $WHITE
+    background-color: $DARK_GRAYISH_BLUE2
+    border-radius: 160px
+    text-transform: capitalize
+
+    @media screen and (min-width: $md)
+      margin-bottom: 16px
+      margin-right: 0
+
+.buttonContainer + .buttonContainer
+  margin-left: 30px
+
+  @media screen and (max-width: $lg)
+    margin-left: 0
+
+.activeButton
+  color: #555C6B
+  border: 3px solid rgba($STRONG_CYAN, 0.5)
+  box-shadow: 0 0 5px rgba($STRONG_CYAN, 0.125)
+
+  .buttonSelectedAnswer
+    background-color: $STRONG_CYAN
