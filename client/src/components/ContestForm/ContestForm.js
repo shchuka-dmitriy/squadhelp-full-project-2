@@ -13,6 +13,7 @@ import Schems from '../../validators/validationSchemes';
 import FieldFileInput from '../InputComponents/FieldFileInput/FieldFileInput';
 import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
 import TryAgain from '../TryAgain/TryAgain';
+import ButtonGroup from "../ButtonGroup/ButtonGroup";
 
 
 
@@ -77,6 +78,7 @@ class ContestForm extends React.Component {
                             header='type of company'
                             optionsArray={this.props.dataForContest.data.typeOfName}
                         />
+                        <ButtonGroup/>
                     </>
                 )
             }
