@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {clearErrorSignUpAndLogin} from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
 
-const LoginPage = (props) => {
+const LoginPage = () => {
 
     return (
         <div className={styles.mainContainer}>
@@ -24,12 +24,12 @@ const LoginPage = (props) => {
                 <div className={styles.loginFormContainer}>
                     <h2 className={styles.loginFormHeader}>LOGIN TO YOUR ACCOUNT</h2>
                     <LoginForm/>
+                    <Link to='/recoverPassword' className={styles.forgotPasswordLink}>forgot password</Link>
                 </div>
             </div>
         </div>
     )
 };
-
 
 const mapDispatchToProps = (dispatch) => {
     return {

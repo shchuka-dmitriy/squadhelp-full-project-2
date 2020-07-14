@@ -1,9 +1,7 @@
 import React from 'react';
 import {onlyForNotAuthorize} from '../../actions/actionCreator';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
-
 
 const OnlyNotAuthorizedUserHoc = (Component) => {
 
@@ -26,14 +24,12 @@ const OnlyNotAuthorizedUserHoc = (Component) => {
             if (this.props.isFetching) {
                 return <Spinner/>;
             } else if (!this.props.data) {
-                return <Component history={this.props.history}/>
+                return <Component history={this.props.history} match={this.props.match}/>
             }
             return null;
         }
     }
-
     return connect(mapStateToProps, mapDispatchToProps)(HocForLoginSignUp);
 };
-
 
 export default OnlyNotAuthorizedUserHoc;

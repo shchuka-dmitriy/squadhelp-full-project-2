@@ -22,6 +22,8 @@ import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatCo
 import PaymentTransactionsInfoPage from "./pages/PaymentTransactionsInfoPage/PaymentTransactionsInfoPage";
 import HowItWorksPage from "./pages/HowItWorksPage/HowItWorksPage";
 import EventPage from "./pages/EventPage/EventPage";
+import RecoverPasswordPage from './pages/RecoverPasswordPage/RecoverPasswordPage';
+import RecoverPasswordConfirmPage from "./pages/RecoverPasswordConfirmPage/RecoverPasswordConfirmPage";
 
 class App extends Component {
     render() {
@@ -65,6 +67,8 @@ class App extends Component {
                     <Route exact path='/transactionsInfo' component={PrivateHoc(PaymentTransactionsInfoPage)}/>
                     <Route exact path='/howItWorks' component={HowItWorksPage}/>
                     <Route exact path='/event' component={PrivateHoc(EventPage)}/>
+                    <Route exact path='/recoverPassword' component={OnlyNotAuthorizedUserHoc(RecoverPasswordPage)}/>
+                    <Route exact path='/recoverPasswordConfirm/:token' component={RecoverPasswordConfirmPage}/>
                     <Route component={NotFound}/>
                 </Switch>
                 <ChatContainer/>
