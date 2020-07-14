@@ -450,3 +450,32 @@ export const deleteEvent = (data) => {
         data: data
     }
 };
+
+export const recoverPassword = (token) => {
+    return {
+        type: ACTION.RECOVER_PASSWORD_REQUEST,
+        token,
+}};
+
+export const recoverPasswordSuccess = (message) => {
+    return {
+        type: ACTION.RECOVER_PASSWORD_SUCCESS,
+        message,
+}};
+
+export const recoverPasswordError = (error) => {
+    return {
+        type: ACTION.RECOVER_PASSWORD_ERROR,
+        error,
+}};
+
+export const recoverPasswordConfirm = (token) => ({
+    type: ACTION.RECOVER_PASSWORD_CONFIRM_REQUEST,
+    token,
+});
+
+export const clearRecoverPasswordError = () => {
+    return {
+        type: ACTION.CLEAR_RECOVER_PASSWORD_ERROR,
+    }
+};
