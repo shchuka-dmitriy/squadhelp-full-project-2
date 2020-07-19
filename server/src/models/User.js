@@ -1,5 +1,7 @@
 'use strict';
 
+const {CUSTOMER, CREATOR, MODERATOR} = require('../constants.js');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('Users', {
       id: {

@@ -1,4 +1,9 @@
 'use strict';
+
+
+const {OFFER_STATUS_PENDING, OFFER_STATUS_REJECTED, OFFER_STATUS_CONFIRM} = require("../constants");
+
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Offers', {
@@ -41,6 +46,15 @@ module.exports = {
         allowNull: true,
         defaultValue: 'pending',
       },
+
+
+      moderatorStatus: {
+        type: Sequelize.ENUM(OFFER_STATUS_PENDING, OFFER_STATUS_REJECTED, OFFER_STATUS_CONFIRM),
+        allowNull: false,
+        defaultValue: OFFER_STATUS_PENDING
+      }
+
+
     });
   },
   down: (queryInterface, Sequelize) => {

@@ -1,4 +1,5 @@
 'use strict';
+const {OFFER_STATUS_PENDING, OFFER_STATUS_REJECTED, OFFER_STATUS_CONFIRM} = require("../constants");
 
 module.exports = (sequelize, DataTypes) => {
   const Offer = sequelize.define('Offers', {
@@ -34,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         defaultValue: 'pending',
       },
+      moderatorStatus: {
+          type: DataTypes.ENUM(OFFER_STATUS_PENDING, OFFER_STATUS_REJECTED, OFFER_STATUS_CONFIRM),
+          allowNull: false,
+          defaultValue: OFFER_STATUS_PENDING
+      }
     },
     {
       timestamps: false,
