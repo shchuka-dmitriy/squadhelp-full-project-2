@@ -13,6 +13,8 @@ import chatReducer from './chatReducer';
 import userProfileReducer from './userProfileReducer';
 import eventReducer from "./eventReducer";
 import recoverPasswordReducer from "./recoverPasswordReducer";
+import getOffersReducer from './getOffersReducer';
+import moderatorReducer from "./moderatorReducer";
 
 const appReducer=combineReducers({
    form: formReducer,
@@ -29,6 +31,8 @@ const appReducer=combineReducers({
    userProfile: userProfileReducer,
    eventStore: eventReducer,
    recoverPasswordReducer: recoverPasswordReducer,
+   getOffersReducer: getOffersReducer,
+   moderatorReducer: moderatorReducer
 });
 
 export default appReducer;
