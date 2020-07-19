@@ -12,6 +12,7 @@ const addOffersNamesSearchOptions = require('../middlewares/offersNamesSearching
 const findUserByEmail = require("../middlewares/findUserByEmail");
 const sendEmailForRecoverPass = require("../middlewares/sendEmail");
 const recoverPassword = require("../middlewares/recoverPassword");
+const offerController = require('../controllers/offerController');
 
 router.post(
     '/registration',
@@ -91,7 +92,6 @@ router.post(
 router.post(
     '/setOfferStatus',
     checkToken.checkToken,
-    basicMiddlewares.onlyForCustomerWhoCreateContest,
     contestController.setOfferStatus,
 );
 
@@ -211,6 +211,13 @@ router.post(
     '/recoverPasswordConfirm',
     checkToken.checkToken,
     recoverPassword.updateNewPassword
+);
+
+router.post(
+    '/getAllOffers',
+    checkToken.checkToken,
+    basicMiddlewares.onlyForModerator,
+    offerController.getAllOffers,
 );
 
 module.exports = router;
