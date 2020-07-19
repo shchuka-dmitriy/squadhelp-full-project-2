@@ -8,7 +8,7 @@ import moment from 'moment';
 
 const ContestSideBar = (props) => {
     const getTimeStr = () => {
-        const diff = (moment.duration(moment().diff(moment(props.contestData.createdAt))));
+        const diff = (moment.duration(moment().diff(moment(props.contestData.createdAt, 'YYYY-MM-DDTHH:mm'))));
         let str = '';
         if (diff._data.days !== 0)
             str = `${diff._data.days} days `;

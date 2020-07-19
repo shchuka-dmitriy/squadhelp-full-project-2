@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './ContestBox.module.sass';
 import moment from 'moment';
 import CONSTANTS from '../../constants';
-
+import PropTypes from 'prop-types';
 
 const ContestBox = (props) => {
 
     const getTimeStr = () => {
-        const diff = (moment.duration(moment().diff(moment(props.data.createdAt))));
+        const diff = (moment.duration(moment().diff(moment(props.data.createdAt, 'YYYY-MM-DDTHH:mm'))));
         let str = '';
         if (diff._data.days !== 0)
             str = `${diff._data.days}d `;
@@ -74,6 +74,10 @@ const ContestBox = (props) => {
             </div>
         </div>
     )
+};
+
+ContestBox.propTypes = {
+  data: PropTypes.object.isRequired
 };
 
 export default ContestBox;
