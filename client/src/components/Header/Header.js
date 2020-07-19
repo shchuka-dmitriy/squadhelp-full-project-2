@@ -81,7 +81,11 @@ class Header extends React.Component {
                     </div>
                 </div>
                 <div className={styles.navContainer}>
-                    <img src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`} className={styles.logo} alt='blue_logo'/>
+                    <Link to='/'>
+                        <img src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`} className={styles.logo} alt='blue_logo'/>
+                    </Link>
+                    {this.props.data && this.props.data.role !== CONSTANTS.MODERATOR
+                    &&
                     <div className={styles.leftNav}>
                         <div className={styles.nav}>
                             <ul>
@@ -104,7 +108,8 @@ class Header extends React.Component {
                                     <span>CONTESTS</span><img src={`${CONSTANTS.STATIC_IMAGES_PATH}menu-down.png`}
                                                               alt='menu'/>
                                     <ul>
-                                        <li><Link to='/howItWorks' style={{textDecoration: 'none'}}>HOW IT WORKS</Link></li>
+                                        <li><Link to='/howItWorks' style={{textDecoration: 'none'}}>HOW IT WORKS</Link>
+                                        </li>
                                         <li><a href="http://www.google.com">PRICING</a></li>
                                         <li><a href="http://www.google.com">AGENCY SERVICE</a></li>
                                         <li><a href="http://www.google.com">ACTIVE CONTESTS</a></li>
@@ -151,9 +156,9 @@ class Header extends React.Component {
                                 </li>
                             </ul>
                         </div>
-                        {this.props.data && this.props.data.role !== CONSTANTS.CREATOR &&
+                        {this.props.data && this.props.data.role === CONSTANTS.CUSTOMER &&
                         <div className={styles.startContestBtn} onClick={this.startContests}>START CONTEST</div>}
-                    </div>
+                    </div>}
                 </div>
             </div>
         )
