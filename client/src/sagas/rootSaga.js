@@ -11,7 +11,6 @@ import {
     getContestByIdSaga,
     downloadContestFileSaga
 } from './contestsSagas'
-import {changeMarkSaga, setOfferStatusSaga, addOfferSaga} from './offerSagas';
 import {
     previewSaga,
     getDialog,
@@ -25,6 +24,13 @@ import {
     removeChatFromCatalogSaga,
     changeCatalogName
 } from './chatSagas';
+import {
+    changeMarkSaga,
+    setOfferStatusSaga,
+    addOfferSaga,
+    getOffersSaga,
+    confirmOfferByModeratorSaga,
+    rejectOfferByModeratorSaga } from './offerSagas';
 import {updateUserPassword, updateUserPasswordConfirm} from './recoverPasswordSaga';
 
 function* rootSaga() {
@@ -57,7 +63,11 @@ function* rootSaga() {
     yield  takeLatest(ACTION.REMOVE_CHAT_FROM_CATALOG_REQUEST,removeChatFromCatalogSaga);
     yield  takeLatest(ACTION.CHANGE_CATALOG_NAME_REQUEST,changeCatalogName);
     yield  takeLatest(ACTION.RECOVER_PASSWORD_REQUEST, updateUserPassword);
-    yield  takeLatest(ACTION.RECOVER_PASSWORD_CONFIRM_REQUEST, updateUserPasswordConfirm)
+    yield  takeLatest(ACTION.RECOVER_PASSWORD_CONFIRM_REQUEST, updateUserPasswordConfirm);
+
+    yield  takeLatest(ACTION.GET_OFFERS_ACTION_REQUEST, getOffersSaga);
+    yield  takeLatest(ACTION.MODERATOR_CONFIRM_OFFER_REQUEST, confirmOfferByModeratorSaga);
+    yield  takeLatest(ACTION.MODERATOR_REJECT_OFFER_REQUEST, rejectOfferByModeratorSaga);
 }
 
 export default rootSaga;

@@ -45,3 +45,4 @@ export const getContestById = (data) => {
 
 export const recoverPassword = (data) => http.post('recoverPassword', data);
 export const recoverPasswordConfirm = (data) => http.post('recoverPasswordConfirm', data);
+export const getAllOffers = (offers) => http.post('getAllOffers', offers);
