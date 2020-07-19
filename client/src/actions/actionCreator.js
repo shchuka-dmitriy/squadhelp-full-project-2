@@ -479,3 +479,72 @@ export const clearRecoverPasswordError = () => {
         type: ACTION.CLEAR_RECOVER_PASSWORD_ERROR,
     }
 };
+
+
+
+
+
+
+
+export const getAllOffersAction = (data) => {
+    return{
+        type: ACTION.GET_OFFERS_ACTION_REQUEST,
+        data: data
+    }
+};
+
+export const getAllOffersSuccess = (data) => {
+    return {
+        type: ACTION.GET_OFFERS_ACTION_SUCCESS,
+        data,
+    }
+};
+
+export const getAllOffersError = (error) => {
+    return {
+        type: ACTION.GET_OFFERS_ACTION_ERROR,
+        error,
+    }
+};
+
+export const moderatorConfirmOfferRequest = (data) => {
+    return {
+        type: ACTION.MODERATOR_CONFIRM_OFFER_REQUEST,
+        data,
+    }
+};
+
+export const moderatorConfirmOfferSuccess = (id) => {
+    return {
+        type: ACTION.MODERATOR_CONFIRM_OFFER_SUCCESS,
+        id,
+    }
+};
+
+export const moderatorConfirmOfferError = (error) => {
+    return {
+        type: ACTION.MODERATOR_CONFIRM_OFFER_ERROR,
+        error,
+    }
+};
+
+export const moderatorRejectOfferRequest = (data) => {
+    return {
+        type: ACTION.MODERATOR_REJECT_OFFER_REQUEST,
+        data,
+    }
+};
+
+export const moderatorRejectOfferSuccess = (id) => {
+    return {
+        type: ACTION.MODERATOR_REJECT_OFFER_SUCCESS,
+        id,
+    }
+};
+
+export const moderatorRejectOfferError = (error) => {
+    return {
+        type: ACTION.MODERATOR_REJECT_OFFER_ERROR,
+        error,
+    }
+};
