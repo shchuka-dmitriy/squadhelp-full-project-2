@@ -14,7 +14,7 @@ import queryString from 'query-string';
 import classNames from 'classnames';
 import isEqual from 'lodash/isEqual';
 import TryAgain from '../../components/TryAgain/TryAgain';
-
+import constants from "../../constants";
 
 const types = ['', 'name,tagline,logo', 'name', 'tagline', 'logo', 'name,tagline', 'logo,tagline', 'name,logo'];
 
@@ -96,7 +96,8 @@ class CreatorDashboard extends React.Component {
             contestId: obj.contestId ? obj.contestId : '',
             industry: obj.industry ? obj.industry : '',
             awardSort: obj.awardSort || 'asc',
-            ownEntries: typeof obj.ownEntries === "undefined" ? false : obj.ownEntries
+            ownEntries: typeof obj.ownEntries === "undefined" ? false : obj.ownEntries,
+                    //moderationStatus: constants.OFFER_STATUS_CONFIRM                   //может тут и не нужно или по другому сделать так как этож отклонен ОФФЕР а не контектст и нжно наверное брать значение из статуса оффера
         };
         if (!isEqual(filter, this.props.creatorFilter)) {
             this.props.newFilter(filter);
@@ -131,7 +132,7 @@ class CreatorDashboard extends React.Component {
         const {contests} = this.props;
         for (let i = 0; i < contests.length; i++) {
             array.push(<ContestBox data={contests[i]} key={contests[i].id}
-                                   goToExtended={this.goToExtended}/>)
+            goToExtended={this.goToExtended} role={constants.CREATOR}/>)
         }
         return array;
     };
