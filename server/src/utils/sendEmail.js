@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-module.exports.sendEmail = (recipientEmail, name, url) => {
+module.exports.sendEmail = (recipientEmail, subject, notification) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -11,12 +11,8 @@ module.exports.sendEmail = (recipientEmail, name, url) => {
     const mailOptions = {
         from: 'additional.dmitriy.shchuka@gmail.com',
         to: recipientEmail,
-        subject: 'Resolve password on squadhelp site',
-        html: ` <div>
-                    <div><h2>Good day! ${name},</h2><p>You have registered on the site Squadhelp</p></div>
-                    <div><p>For resolve password go to the link <a href="${url}">CHANGE PASSWORD</a></p></div>
-                    <div><p>With respect, Administration Squadhelp!</p></div>
-                </div>`,
+        subject: subject,
+        html: notification,
     };
     transporter.sendMail(mailOptions, function (error) {
         if (error) {
