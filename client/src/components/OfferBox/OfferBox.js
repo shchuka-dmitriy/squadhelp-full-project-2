@@ -7,8 +7,7 @@ import {
     changeMark,
     clearChangeMarkError,
     goToExpandedDialog,
-    changeShowImage,
-    changeModalShow
+    changeShowImage
 } from '../../actions/actionCreator';
 import {withRouter} from 'react-router-dom';
 import isEqual from 'lodash/isEqual';
@@ -16,7 +15,6 @@ import classNames from 'classnames';
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './confirmStyle.css';
-
 
 const OfferBox = (props) => {
 
@@ -36,7 +34,6 @@ const OfferBox = (props) => {
         }
         return null;
     };
-
 
     const resolveOffer = () => {
         confirmAlert({
@@ -70,7 +67,6 @@ const OfferBox = (props) => {
         });
     };
 
-
     const changeMark = (value) => {
         props.clearError();
         props.changeMark({
@@ -83,21 +79,22 @@ const OfferBox = (props) => {
 
     const offerStatus = () => {
         const {status} = props.data;
-        if (status === CONSTANTS.OFFER_STATUS_REJECTED) {
+        if (status === CONSTANTS.OFFER_STATUS_REJECTED || status === CONSTANTS.OFFER_STATUS_REJECTED_BY_MODERATOR) {
             return <i className={classNames("fas fa-times-circle reject", styles.reject)}/>
         } else if (status === CONSTANTS.OFFER_STATUS_WON) {
             return <i className={classNames("fas fa-check-circle resolve", styles.resolve)}/>
+        } else if (status === CONSTANTS.OFFER_STATUS_CONFIRM) {
+            return <i className={classNames("fas fa-thumbs", styles.confirm)}/>
         }
         return null;
     };
-
 
     const goChat = () => {
         props.goToExpandedDialog({interlocutor: props.data.User, conversationData: findConversationInfo()});
     };
 
+    const {moderatorStatus, role, id, contestType, data, } = props;
 
-    const {data, role, id, contestType} = props;
     const {avatar, firstName, lastName, email, rating} = props.data.User;
     return (
         <div className={styles.offerContainer}>
@@ -146,14 +143,27 @@ const OfferBox = (props) => {
                 </div>
                 {role !== CONSTANTS.CREATOR && <i onClick={goChat} className="fas fa-comments"/>}
             </div>
-            {props.needButtons(data.status) && <div className={styles.btnsContainer}>
-                <div onClick={resolveOffer} className={styles.resolveBtn}>Resolve</div>
-                <div onClick={rejectOffer} className={styles.rejectBtn}>Reject</div>
-            </div>}
+            {
+                role === CONSTANTS.MODERATOR ? <div className={styles.btnsContainer}>
+                        {
+                            data.status !== CONSTANTS.OFFER_STATUS_CONFIRM &&
+                            <div onClick={ () => props.moderatorConfirmOffer(data.User.id, data.id, 'resolve')} className={styles.resolveBtn}>M Resolve</div>
+                        }
+                        {
+                            data.status !== CONSTANTS.OFFER_STATUS_REJECTED_BY_MODERATOR &&
+                            <div onClick={ () => props.moderatorRejectOffer(data.User.id, data.id, 'reject_by_moderator')} className={styles.rejectBtn}>M Reject</div>
+                        }
+                    </div>
+                    :
+                    <>
+                        <div onClick={resolveOffer} className={styles.resolveBtn}>Resolve</div>
+                        <div onClick={rejectOffer} className={styles.rejectBtn}>Reject</div>
+                    </>
+            }
+
         </div>
     )
 };
-
 
 const mapDispatchToProps = (dispatch) => {
     return {
