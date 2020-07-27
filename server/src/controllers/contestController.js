@@ -1,12 +1,15 @@
 const db = require('../models');
 import ServerError from '../errors/ServerError';
-
 const contestQueries = require('./queries/contestQueries');
 const userQueries = require('./queries/userQueries');
 const controller = require('../socketInit');
 const UtilFunctions = require('../utils/functions');
 const NotFound = require('../errors/UserNotFoundError');
 const CONSTANTS = require('../constants');
+const {setOfferStatusByModerator} = require('./offerController');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
+
 
 module.exports.dataForContest = async (req, res, next) => {
   let response = {};
@@ -39,8 +42,11 @@ module.exports.dataForContest = async (req, res, next) => {
 
 module.exports.getContestById = async (req, res, next) => {
   try {
+    const {tokenData: {role, id}, headers: {contestid}} = req;
     let contestInfo = await db.Contests.findOne({
-      where: { id: req.headers.contestid },
+      where: { id: contestid,
+        ...(role === CONSTANTS.CREATOR && {moderatorStatus: CONSTANTS.OFFER_STATUS_CONFIRM})
+      },
       order: [
         [db.Offers, 'id', 'asc'],
       ],
@@ -60,9 +66,10 @@ module.exports.getContestById = async (req, res, next) => {
         {
           model: db.Offers,
           required: false,
-          where: req.tokenData.role === CONSTANTS.CREATOR
-            ? { userId: req.tokenData.userId }
-            : {},
+          where: {
+            ...(role === CONSTANTS.CREATOR && {userId: id}),
+            ...(role === CONSTANTS.CUSTOMER && {moderatorStatus: CONSTANTS.OFFER_STATUS_CONFIRM})
+          },
           attributes: { exclude: ['userId', 'contestId'] },
           include: [
             {
@@ -96,7 +103,7 @@ module.exports.getContestById = async (req, res, next) => {
     });
     res.send(contestInfo);
   } catch (e) {
-    next(new ServerError());
+    next(new ServerError(e));
   }
 };
 
@@ -164,7 +171,9 @@ const resolveOffer = async (
             ELSE '${ CONSTANTS.CONTEST_STATUS_PENDING }'
             END
     `),
-  }, { orderId: orderId }, transaction);
+  }, { orderId: orderId, status:{
+      [Op.ne]:CONSTANTS.CONTEST_STATUS_FINISHED
+    } }, transaction);
   await userQueries.updateUser(
     { balance: db.sequelize.literal('balance + ' + finishedContest.prize) },
     creatorId, transaction);
@@ -193,6 +202,9 @@ const resolveOffer = async (
 };
 
 module.exports.setOfferStatus = async (req, res, next) => {
+  if ( req.tokenData.role === CONSTANTS.MODERATOR ) {
+    await setOfferStatusByModerator(req, res, next);
+  }
   let transaction;
   if (req.body.command === 'reject') {
     try {
@@ -210,21 +222,30 @@ module.exports.setOfferStatus = async (req, res, next) => {
         req.body.priority, transaction);
       res.send(winningOffer);
     } catch (err) {
-      transaction.rollback();
+      await transaction.rollback();
       next(err);
     }
   }
 };
 
 module.exports.getCustomersContests = (req, res, next) => {
+  const {headers: {status}, tokenData: {userId}, body: {limit, offset}} = req;
   db.Contests.findAll({
-    where: { status: req.headers.status, userId: req.tokenData.userId },
-    limit: req.body.limit,
-    offset: req.body.offset ? req.body.offset : 0,
+    where: { status, userId },
+    limit,
+    offset: offset || 0,
     order: [['id', 'DESC']],
     include: [
       {
         model: db.Offers,
+          where: {
+            status: {
+              [Op.notIn]:  [CONSTANTS.OFFER_STATUS_PENDING]
+            },
+            moderatorStatus: {
+              [Op.in]:  [CONSTANTS.OFFER_STATUS_CONFIRM]
+            }
+          },
         required: false,
         attributes: ['id'],
       },
