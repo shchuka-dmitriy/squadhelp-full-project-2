@@ -1,0 +1,74 @@
+@import '../../assets/stylesConstants/colors.sass'
+@import '../../assets/stylesConstants/breakpoints.sass'
+@import '../../assets/stylesConstants/flexConstants.sass'
+
+.btnContainer
+  font-family: Nunito, sans-serif
+  display: flex
+  align-items: center
+  justify-content: center
+  //margin-bottom: 20px
+  //@media(max-width: $lg)
+  //  flex-direction: row
+
+.filter
+  text-align: center
+  color: #46568a
+  font-size: 18px
+  border-radius: 10px
+  padding: 10px
+
+  width: 150px
+  text-transform: uppercase
+  @media(max-width: $md)
+    font-size: 13px
+    width: 100px
+  &:hover
+    background-color: #eefaea
+
+.filter + .filter
+  margin-left: 10px
+
+.activeFilter
+  background-color: #4e618d
+  color: #e7eaf3
+  &:hover
+    background-color: #4e618d
+
+//.filterContainer
+//  min-width: 250px
+//  height: 350px
+//  padding-top: 30px
+//  margin-right: 50px
+//  display: flex
+//  flex-direction: column
+//  box-shadow: 0 5px 10px 3px rgba(0,0,0,0.1)
+//  align-items: flex-start
+//  background-color: white
+//  margin-bottom: 15px
+//  @media(max-width: 1000px)
+//    padding-top: 10px
+//    padding-bottom: 15px
+//    flex-direction: row
+//    margin-right: 0
+//    justify-content: center
+//    height: 80px
+//.filter
+//  cursor: pointer
+//  margin-top: 15px
+//  align-self: stretch
+//  text-align: center
+//  color: #46568a
+//  font-size: 18px
+//  border-radius: 10px
+//  padding: 10px
+//  @media(max-width: 1000px)
+//    margin: 0 5px
+//  &:hover
+//    background-color: #eefaea
+//.activeFilter
+//  transition: 0.5s background-color
+//  background-color: #4e618d
+//  color: white
+//  &:hover
+//    background-color: #4e618d
