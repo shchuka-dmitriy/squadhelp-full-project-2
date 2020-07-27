@@ -7,10 +7,9 @@ import isEmpty from 'lodash/isEmpty';
 import CONSTANTS from '../../constants';
 import Error from '../../components/Error/Error';
 
-const Payment = (props) => {
+const Payment = ({history, pay, contestStore: {contests}, clearPaymentStore, payment: {error}}) => {
 
-    const pay = (values) => {
-        const {contests} = props.contestStore;
+    const sendPayment = (values) => {
         const contestArray = [];
         Object.keys(contests).forEach(key => contestArray.push(contests[key]));
         const {number, expiry, cvc} = values;
@@ -23,22 +22,18 @@ const Payment = (props) => {
         data.append('expiry', expiry);
         data.append('cvc', cvc);
         data.append('contests', JSON.stringify(contestArray));
-        data.append('price', '100');
-        props.pay({
+        data.append('price', contestArray.length === 3 ? '99' : '100');
+        pay({
             formData: data
         });
     };
 
     const goBack = () => {
-        props.history.goBack();
+        history.goBack();
     };
 
-
-    const {contests} = props.contestStore;
-    const {error} = props.payment;
-    const {clearPaymentStore} = props;
     if (isEmpty(contests)) {
-        props.history.replace('startContest');
+        history.replace('startContest');
     }
     return (
         <div>
@@ -49,7 +44,7 @@ const Payment = (props) => {
                 <div className={styles.paymentContainer}>
                     <span className={styles.headerLabel}>Checkout</span>
                     {error && <Error data={error.data} status={error.status} clearError={clearPaymentStore}/>}
-                    <PayForm sendRequest={pay} back={goBack} isPayForOrder={true}/>
+                    <PayForm sendRequest={sendPayment} back={goBack} isPayForOrder={true}/>
                 </div>
                 <div className={styles.orderInfoContainer}>
                     <span className={styles.orderHeader}>Order Summary</span>
@@ -67,7 +62,6 @@ const Payment = (props) => {
         </div>
     )
 };
-
 
 const mapStateToProps = (state) => {
     return {

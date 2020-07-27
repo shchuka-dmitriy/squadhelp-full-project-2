@@ -89,4 +89,6 @@ export default {
       ],
     },
   ],
+  PRICE_FOR_CONTESTS: '100',
+  PRICE_FOR_THREE_CONTESTS: '99',
 };
