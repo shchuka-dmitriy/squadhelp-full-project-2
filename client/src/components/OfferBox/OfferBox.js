@@ -1,3 +1,4 @@
+
 import React from 'react';
 import styles from './OfferBox.module.sass';
 import CONSTANTS from '../../constants';
@@ -53,7 +54,7 @@ const OfferBox = (props) => {
 
     const rejectOffer = () => {
         confirmAlert({
-            title: 'confirm',
+            title: 'reject',
             message: 'Are u sure?',
             buttons: [
                 {
@@ -79,12 +80,10 @@ const OfferBox = (props) => {
 
     const offerStatus = () => {
         const {status} = props.data;
-        if (status === CONSTANTS.OFFER_STATUS_REJECTED || status === CONSTANTS.OFFER_STATUS_REJECTED_BY_MODERATOR) {
+        if (status === CONSTANTS.OFFER_STATUS_REJECTED) {
             return <i className={classNames("fas fa-times-circle reject", styles.reject)}/>
         } else if (status === CONSTANTS.OFFER_STATUS_WON) {
             return <i className={classNames("fas fa-check-circle resolve", styles.resolve)}/>
-        } else if (status === CONSTANTS.OFFER_STATUS_CONFIRM) {
-            return <i className={classNames("fas fa-thumbs", styles.confirm)}/>
         }
         return null;
     };
@@ -93,13 +92,13 @@ const OfferBox = (props) => {
         props.goToExpandedDialog({interlocutor: props.data.User, conversationData: findConversationInfo()});
     };
 
-    const {moderatorStatus, role, id, contestType, data, } = props;
+    const {role, id, contestType, data, } = props;
 
     const {avatar, firstName, lastName, email, rating} = props.data.User;
     return (
-        <div className={styles.offerContainer}>
+        <div className={classNames(styles.offerContainer, role === CONSTANTS.MODERATOR && styles.moderatorOfferContainer)}>
             {offerStatus()}
-            <div className={styles.mainInfoContainer}>
+            <div className={classNames(styles.mainInfoContainer, role === CONSTANTS.MODERATOR && styles.moderatorMainInfoContainer)}>
                 <div className={styles.userInfo}>
                     <div className={styles.creativeInfoContainer}>
                         <img
@@ -132,33 +131,38 @@ const OfferBox = (props) => {
                             :
                             <span className={styles.response}>{data.text}</span>
                     }
-                    {data.User.id !== id && <Rating
-                        fractions={2}
-                        fullSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt='star'/>}
-                        placeholderSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt='star'/>}
-                        emptySymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`} alt='star'/>}
-                        onClick={changeMark}
-                        placeholderRating={data.mark}
-                    />}
+                    {
+                        (data.User.id !== id && role !== CONSTANTS.MODERATOR) &&
+                            <Rating
+                                fractions={2}
+                                fullSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt='star'/>}
+                                placeholderSymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star.png`} alt='star'/>}
+                                emptySymbol={<img src={`${CONSTANTS.STATIC_IMAGES_PATH}star-outline.png`} alt='star'/>}
+                                onClick={changeMark}
+                                placeholderRating={data.mark}
+                            />
+                    }
                 </div>
-                {role !== CONSTANTS.CREATOR && <i onClick={goChat} className="fas fa-comments"/>}
+                {(role !== CONSTANTS.CREATOR && role !== CONSTANTS.MODERATOR) && <i onClick={goChat} className="fas fa-comments"/>}
             </div>
             {
                 role === CONSTANTS.MODERATOR ? <div className={styles.btnsContainer}>
                         {
-                            data.status !== CONSTANTS.OFFER_STATUS_CONFIRM &&
-                            <div onClick={ () => props.moderatorConfirmOffer(data.User.id, data.id, 'resolve')} className={styles.resolveBtn}>M Resolve</div>
+                            data.moderatorStatus !== CONSTANTS.OFFER_STATUS_CONFIRM &&
+                            <div onClick={ () => props.moderatorChangeOffer(data.User.id, data.id, 'confirm_by_moderator')}
+                                 className={styles.resolveBtn}>Confirm</div>
                         }
                         {
-                            data.status !== CONSTANTS.OFFER_STATUS_REJECTED_BY_MODERATOR &&
-                            <div onClick={ () => props.moderatorRejectOffer(data.User.id, data.id, 'reject_by_moderator')} className={styles.rejectBtn}>M Reject</div>
+                            data.moderatorStatus !== CONSTANTS.OFFER_STATUS_REJECTED &&
+                            <div onClick={ () => props.moderatorChangeOffer(data.User.id, data.id, 'reject_by_moderator')}
+                                 className={styles.rejectBtn}>Reject</div>
                         }
                     </div>
                     :
-                    <>
+                    <div className={styles.btnsContainer}>
                         <div onClick={resolveOffer} className={styles.resolveBtn}>Resolve</div>
                         <div onClick={rejectOffer} className={styles.rejectBtn}>Reject</div>
-                    </>
+                    </div>
             }
 
         </div>
