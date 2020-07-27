@@ -1,3 +1,4 @@
+
 import ACTION from './actionTypes';
 
 
@@ -480,12 +481,6 @@ export const clearRecoverPasswordError = () => {
     }
 };
 
-
-
-
-
-
-
 export const getAllOffersAction = (data) => {
     return{
         type: ACTION.GET_OFFERS_ACTION_REQUEST,
@@ -546,5 +541,11 @@ export const moderatorRejectOfferError = (error) => {
     return {
         type: ACTION.MODERATOR_REJECT_OFFER_ERROR,
         error,
+    }
+};
+
+export const clearOffersList = () => {
+    return {
+        type: ACTION.CLEAR_OFFERS_LIST
     }
 };
