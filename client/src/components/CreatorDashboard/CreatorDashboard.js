@@ -96,8 +96,7 @@ class CreatorDashboard extends React.Component {
             contestId: obj.contestId ? obj.contestId : '',
             industry: obj.industry ? obj.industry : '',
             awardSort: obj.awardSort || 'asc',
-            ownEntries: typeof obj.ownEntries === "undefined" ? false : obj.ownEntries,
-                    //moderationStatus: constants.OFFER_STATUS_CONFIRM                   //может тут и не нужно или по другому сделать так как этож отклонен ОФФЕР а не контектст и нжно наверное брать значение из статуса оффера
+            ownEntries: typeof obj.ownEntries === "undefined" ? false : obj.ownEntries
         };
         if (!isEqual(filter, this.props.creatorFilter)) {
             this.props.newFilter(filter);

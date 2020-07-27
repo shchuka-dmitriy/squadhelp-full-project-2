@@ -22,11 +22,11 @@ FormInput.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     classes: PropTypes.shape({
-        container: PropTypes.string.isRequired,
-        input: PropTypes.string.isRequired,
-        valid: PropTypes.string.isRequired,
-        notValid: PropTypes.string.isRequired,
-        warning: PropTypes.string.isRequired
+        container: PropTypes.string,
+        input: PropTypes.string,
+        valid: PropTypes.string,
+        notValid: PropTypes.string,
+        warning: PropTypes.string
     })
 };
 

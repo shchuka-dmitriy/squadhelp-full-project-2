@@ -84,8 +84,6 @@ class Header extends React.Component {
                     <Link to='/'>
                         <img src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`} className={styles.logo} alt='blue_logo'/>
                     </Link>
-                    {this.props.data && this.props.data.role !== CONSTANTS.MODERATOR
-                    &&
                     <div className={styles.leftNav}>
                         <div className={styles.nav}>
                             <ul>
@@ -158,7 +156,7 @@ class Header extends React.Component {
                         </div>
                         {this.props.data && this.props.data.role === CONSTANTS.CUSTOMER &&
                         <div className={styles.startContestBtn} onClick={this.startContests}>START CONTEST</div>}
-                    </div>}
+                    </div>
                 </div>
             </div>
         )

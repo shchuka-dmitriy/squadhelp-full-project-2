@@ -28,7 +28,7 @@ class ContestsContainer extends React.Component {
         if (!isFetching && this.props.children.length === 0) {
             return <div className={styles.notFound}>Nothing not found</div>;
         } else return (
-            <div>
+            <div key={this.props.children.id}>
                 {this.props.children}
                 {isFetching && <div className={styles.spinnerContainer}><Spinner/></div>}
             </div>
