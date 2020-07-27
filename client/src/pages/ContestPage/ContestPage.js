@@ -43,28 +43,27 @@ class ContestPage extends React.Component {
 
 
     setOffersList = () => {
+        const {contestByIdStore: {offers, contestData: {contestType}}} = this.props;
         const array = [];
-        for (let i = 0; i < this.props.contestByIdStore.offers.length; i++) {
-            array.push(<OfferBox data={this.props.contestByIdStore.offers[i]}
-                                 key={this.props.contestByIdStore.offers[i].id} needButtons={this.needButtons}
+        for (let i = 0; i < offers.length; i++) {
+            array.push(<OfferBox data={offers[i]}
+                                 key={offers[i].id} needButtons={this.needButtons}
                                  setOfferStatus={this.setOfferStatus}
-                                 contestType={this.props.contestByIdStore.contestData.contestType} date={new Date()}/>)
+                                 contestType={contestType} date={new Date()}/>)
         }
         return array.length !== 0 ? array : <div className={styles.notFound}>There is no suggestion at this moment</div>
     };
 
 
     needButtons = (offerStatus) => {
-        const contestCreatorId = this.props.contestByIdStore.contestData.User.id;
-        const userId = this.props.userStore.data.id;
-        const contestStatus = this.props.contestByIdStore.contestData.status;
-        return (contestCreatorId === userId && contestStatus === CONSTANTS.CONTEST_STATUS_ACTIVE && offerStatus === CONSTANTS.OFFER_STATUS_CONFIRM);
+        const {contestByIdStore: {contestData: {User, status}}, userStore: {data}} = this.props;
+        return (User.id === data.id && status === CONSTANTS.CONTEST_STATUS_ACTIVE && offerStatus === CONSTANTS.OFFER_STATUS_CONFIRM);
     };
 
 
     setOfferStatus = (creatorId, offerId, command) => {
-        this.props.clearSetOfferStatusError();
-        const {id, orderId, priority} = this.props.contestByIdStore.contestData;
+        const {clearSetOfferStatusError, setOfferStatus, contestByIdStore: {contestData: {id, orderId, priority}}} = this.props;
+        clearSetOfferStatusError();
         const obj = {
             command,
             offerId,
@@ -73,13 +72,12 @@ class ContestPage extends React.Component {
             priority,
             contestId: id
         };
-        this.props.setOfferStatus(obj);
+        setOfferStatus(obj);
     };
 
 
     findConversationInfo = (interlocutorId) => {
-        const {messagesPreview} = this.props.chatStore;
-        const {id} = this.props.userStore.data;
+        const {chatStore: {messagesPreview}, userStore: {data: {id}}} = this.props;
         const participants = [id, interlocutorId];
         participants.sort((participant1, participant2) => participant1 - participant2);
         for (let i = 0; i < messagesPreview.length; i++) {
@@ -96,26 +94,25 @@ class ContestPage extends React.Component {
     };
 
     goChat = () => {
-        const {User} = this.props.contestByIdStore.contestData;
-        this.props.goToExpandedDialog({
+        const {contestByIdStore: {contestData: {User}}, goToExpandedDialog} = this.props;
+        goToExpandedDialog({
             interlocutor: User,
             conversationData: this.findConversationInfo(User.id)
         });
     };
 
     render() {
-        const {role} = this.props.userStore.data;
-        const {contestByIdStore, changeShowImage, changeContestViewMode, getData, clearSetOfferStatusError} = this.props;
+        const {contestByIdStore, changeShowImage, changeContestViewMode, clearSetOfferStatusError, userStore: {data: {role}}} = this.props;
         const {isShowOnFull, imagePath, error, isFetching, isBrief, contestData, offers, setOfferStatusError} = contestByIdStore;
+        const {publicURL, MODERATOR, CREATOR, CONTEST_STATUS_ACTIVE} = CONSTANTS;
         return (
             <div>
-                {/*<Chat/>*/}
                 {isShowOnFull && <LightBox
-                    mainSrc={`${CONSTANTS.publicURL}${imagePath}`}
+                    mainSrc={`${publicURL}${imagePath}`}
                     onCloseRequest={() => changeShowImage({isShowOnFull: false, imagePath: null})}
                 />}
                 <Header/>
-                {error ? <div className={styles.tryContainer}><TryAgain getData={getData}/></div> :
+                {error ? <div className={styles.tryContainer}><TryAgain getData={this.getData}/></div> :
                     (
                         isFetching ?
                             <div className={styles.containerSpinner}>
@@ -127,9 +124,8 @@ class ContestPage extends React.Component {
                                     <div className={styles.buttonsContainer}>
                         <span onClick={() => changeContestViewMode(true)}
                               className={classNames(styles.btn, {[styles.activeBtn]: isBrief})}>Brief</span>
-                                        {(this.props.contestByIdStore.offers.length !== 0 &&
-                                            role !== CONSTANTS.MODERATOR || role === CONSTANTS.CREATOR) &&
-                                            <span onClick={() => changeContestViewMode(false)}
+                                        {(offers.length !== 0 && role !== MODERATOR || role === CREATOR)
+                                        && <span onClick={() => changeContestViewMode(false)}
                                                   className={classNames(styles.btn, {[styles.activeBtn]: !isBrief})}>Offer</span>
                                         }
                                     </div>
@@ -138,7 +134,7 @@ class ContestPage extends React.Component {
                                             <Brief contestData={contestData} role={role} goChat={this.goChat}/>
                                             :
                                             <div className={styles.offersContainer}>
-                                                {(role === CONSTANTS.CREATOR && contestData.status === CONSTANTS.CONTEST_STATUS_ACTIVE) &&
+                                                {(role === CREATOR && contestData.status === CONTEST_STATUS_ACTIVE) &&
                                                 <OfferForm contestType={contestData.contestType}
                                                            contestId={contestData.id}
                                                            customerId={contestData.User.id}/>}

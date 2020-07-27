@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Article = (props) => {
+const Article = ({className, articleHeader, articleContent}) => {
     return (
-        <div className={props.className.articleContainer}>
+        <div className={className.articleContainer}>
             <article>
-                <h2 className={props.className.articleHeader}>{props.articleHeader}</h2>
-                <p className={props.className.articleContent}>{props.articleContent}</p>
+                <h2 className={className.articleHeader}>{articleHeader}</h2>
+                <p className={className.articleContent}>{articleContent}</p>
             </article>
         </div>
 
