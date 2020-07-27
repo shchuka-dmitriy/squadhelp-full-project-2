@@ -1,3 +1,4 @@
+
 import ACTION from '../actions/actionTypes';
 import CONSTANTS from '../constants';
 
@@ -5,11 +6,8 @@ const initialState = {
     isFetching: true,
     error: null,
     offers: [],
-    customerFilter: CONSTANTS.CONTEST_STATUS_ACTIVE,
     moderationStatus: CONSTANTS.OFFER_STATUS_CONFIRM,
     isChangeOfferStatus: false,
-    totalHave: null,
-    haveMore: true
 };
 
 export default function (state = initialState, action) {
@@ -18,6 +16,7 @@ export default function (state = initialState, action) {
         case ACTION.MODERATOR_REJECT_OFFER_REQUEST: {
             return {
                 ...state,
+                isChangeOfferStatus: true,
                 isFetching: true,
             }
         }
@@ -34,14 +33,12 @@ export default function (state = initialState, action) {
         case ACTION.MODERATOR_REJECT_OFFER_ERROR: {
             return {
                 ...state,
-                error: action.error,
-                isChangeOfferStatus: false
+                error: action.error
             }
         }
         default:
             return {
-                ...state,
-                statusUpdate: false
+                ...state
             };
     }
 }
