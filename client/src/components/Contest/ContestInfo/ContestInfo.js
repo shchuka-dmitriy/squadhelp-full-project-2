@@ -6,8 +6,8 @@ import NameContestSpecialInfo from './NameContestSpecialInfo';
 import TaglineContestSpecialInfo from './TaglineContestSpecialInfo';
 
 
-const ContestInfo = (props) => {
-    const {changeEditContest, userId, contestData, role, goChat} = props;
+const ContestInfo = ({changeEditContest, userId, contestData, role, goChat}) => {
+
     const {
         typeOfTagline, brandStyle, typeOfName, styleName, contestType,
         title, focusOfWork, targetCustomer, industry, originalFileName,

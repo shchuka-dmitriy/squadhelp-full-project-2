@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './GetInTouch.module.sass';
 import Icon from "@iconify/react";
 import emailMark from "@iconify/icons-fa/envelope-o";
+import {Link} from "react-router-dom";
 
 const GetInTouch = () => {
     return (
@@ -19,12 +20,12 @@ const GetInTouch = () => {
                     </div>
                     <div className={styles.getInTouchQuestionContent}>
                         Check out our&#160;
-                        <a href='http://help.squadhelp.com'>FAQs </a>
+                        <Link to='http://help.squadhelp.com'>FAQs </Link>
                         or send us a&#160;
-                        <a href="#">message</a>.
+                        <Link to='/'>message</Link>.
                         For assistance with launching a contest, you can also call us at (877) 355-3585 or
                         schedule a&#160;
-                        <a href="#">Branding Consultation</a>
+                        <Link to='/'>Branding Consultation</Link>
                     </div>
                 </div>
                 <div className={styles.getInTouchButtonContainer}>
