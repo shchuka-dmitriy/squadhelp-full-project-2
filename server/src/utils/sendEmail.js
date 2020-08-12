@@ -14,11 +14,5 @@ module.exports.sendEmail = (recipientEmail, subject, notification) => {
         subject: subject,
         html: notification,
     };
-    transporter.sendMail(mailOptions, function (error) {
-        if (error) {
-            console.log('Email dont sent, because of: ' + error);
-        } else {
-            console.log('Email sent');
-        }
-    });
+    transporter.sendMail(mailOptions);
 };

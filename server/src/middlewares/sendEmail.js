@@ -12,7 +12,7 @@ module.exports.sendEmailForRecoverPass = async (req, res, next) => {
                     <div><p>For resolve password go to the link <a href="${url}">CHANGE PASSWORD</a></p></div>
                     <div><p>With respect, Administration Squadhelp!</p></div>
              </div>`;
-        await sendEmailResolvePass.sendEmail(email, notification, subject);
+        await sendEmailResolvePass.sendEmail(email, subject, notification);
         res.send('Email send to your address');
     } catch (err) {
         next(err);
