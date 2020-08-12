@@ -158,7 +158,7 @@ const OfferBox = (props) => {
                                  className={styles.rejectBtn}>Reject</div>
                         }
                     </div>
-                    :
+                    : role === CONSTANTS.CUSTOMER &&
                     <div className={styles.btnsContainer}>
                         <div onClick={resolveOffer} className={styles.resolveBtn}>Resolve</div>
                         <div onClick={rejectOffer} className={styles.rejectBtn}>Reject</div>

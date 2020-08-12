@@ -45,7 +45,7 @@ module.exports.getContestById = async (req, res, next) => {
     const {tokenData: {role, id}, headers: {contestid}} = req;
     let contestInfo = await db.Contests.findOne({
       where: { id: contestid,
-        ...(role === CONSTANTS.CREATOR && {moderatorStatus: CONSTANTS.OFFER_STATUS_CONFIRM})
+        ...(role === CONSTANTS.CREATOR)
       },
       order: [
         [db.Offers, 'id', 'asc'],

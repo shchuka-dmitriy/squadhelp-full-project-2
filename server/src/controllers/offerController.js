@@ -52,29 +52,19 @@ module.exports.setOfferStatusByModerator = async (req, res, next) => {
         const {body: {command, offerId}} = req;
         const {userId, text} = await db.Offers.findOne({where: {id: offerId}});
         const {firstName, lastName, email} = await userQueries.findUser({ id: userId });
+        let changedOffer;
         switch (command) {
-            case 'reject_by_moderator': {
-                try {
-                    const changedOffer = await rejectOffer(offerId, userId, text, email, firstName, lastName);
-                    res.send(changedOffer);
-                } catch (err) {
-                    next(err);
-                }
+            case 'reject_by_moderator':
+                    changedOffer = await rejectOffer(offerId, userId, text, email, firstName, lastName);
                 break;
-            }
-            case 'confirm_by_moderator': {
-                try {
-                    const changedOffer = await confirmOffer(offerId, userId, text, email, firstName, lastName);
-                    res.send(changedOffer);
-                } catch (err) {
-                    next(err);
-                }
+            case 'confirm_by_moderator':
+                    changedOffer = await confirmOffer(offerId, userId, text, email, firstName, lastName);
                 break;
-            }
             default: {
                 new ServerError();
             }
         }
+        res.send(changedOffer);
     }
     catch ( err ) {
         next(err);
